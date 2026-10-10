@@ -6,24 +6,24 @@ const initialColumns = [
   {
     id: 'backlog',
     title: 'Backlog',
-    tone: '#1f4dd9',
+    tone: '#6366f1',
     tasks: [
-      { id: 'task-1', title: 'Landing QA', description: 'Revisar spacing, foco visible y estados vacios.', priority: 'high', assignee: 'Samanta' },
-      { id: 'task-2', title: 'API notes', description: 'Documentar restricciones del endpoint y limites.', priority: 'medium', assignee: 'Marco' },
+      { id: 'task-1', title: 'Landing QA', description: 'Revisar spacing, foco visible y estados vacíos.', priority: 'high', assignee: 'Samanta' },
+      { id: 'task-2', title: 'API notes', description: 'Documentar restricciones del endpoint y límites de cuota.', priority: 'medium', assignee: 'Marco' },
     ],
   },
   {
     id: 'in-progress',
-    title: 'In Progress',
-    tone: '#7c5cff',
+    title: 'En Progreso',
+    tone: '#06b6d4',
     tasks: [
       { id: 'task-3', title: 'Portfolio cards', description: 'Ajustar grid, contraste y CTA secundarios.', priority: 'high', assignee: 'Ana' },
     ],
   },
   {
     id: 'done',
-    title: 'Done',
-    tone: '#15a36e',
+    title: 'Completado',
+    tone: '#10b981',
     tasks: [
       { id: 'task-4', title: 'Design tokens', description: 'Unificar paleta, radios y sombras base.', priority: 'low', assignee: 'Luis' },
     ],
@@ -45,9 +45,12 @@ export const useKanbanStore = defineStore('kanban', {
     initialized: false,
     priorityFilter: 'all',
     search: '',
-    theme: 'light',
+    theme: 'dark',
   }),
   getters: {
+    totalTasksCount(state) {
+      return state.columns.reduce((acc, col) => acc + (col.tasks ? col.tasks.length : 0), 0)
+    },
     filteredColumns(state) {
       return state.columns.map((column) => ({
         ...column,
